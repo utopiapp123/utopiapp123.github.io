@@ -13,37 +13,96 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 	<body>
 		<Header />
 		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This template
-				serves as a lightweight, minimally-styled starting point for anyone looking to build a personal
-				website, blog, or portfolio with Astro.
+			<h1>👋 Hello, I'm [Your Name]</h1>
+			<p class="intro">
+				[Your title/role, e.g., Developer | Designer | Creator] based in [Your Location].
+				Passionate about [your interests, e.g., building great products, open source, and sharing knowledge].
 			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
+			
+			<h2>🚀 What I Do</h2>
 			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
+				<li><strong>[Skill 1]:</strong> [Brief description, e.g., Building web applications with React and Node.js]</li>
+				<li><strong>[Skill 2]:</strong> [Brief description, e.g., Designing user interfaces and experiences]</li>
+				<li><strong>[Skill 3]:</strong> [Brief description, e.g., Writing technical articles and tutorials]</li>
 			</ul>
+			
+			<h2>💼 Featured Projects</h2>
+			<div class="projects">
+				<div class="project">
+					<h3>[Project Name 1]</h3>
+					<p>[Brief description of your project]</p>
+					<p><a href="[project-link]">View Project →</a></p>
+				</div>
+				<div class="project">
+					<h3>[Project Name 2]</h3>
+					<p>[Brief description of your project]</p>
+					<p><a href="[project-link]">View Project →</a></p>
+				</div>
+			</div>
+			
+			<h2>📬 Get in Touch</h2>
 			<p>
-				Have fun! If you get stuck, remember to
-				<a href="https://docs.astro.build/">read the docs</a>
-				or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out
-				<a href="https://github.com/Charca/astro-blog-template">astro-blog-template</a>
-				by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
+				I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
+				Feel free to reach out via <a href="mailto:[your-email]">email</a> or connect on 
+				<a href="[github-profile]">GitHub</a> / <a href="[twitter-profile]">Twitter</a>.
 			</p>
 		</main>
 		<Footer />
 	</body>
 </html>
+
+<style>
+	main {
+		max-width: 68ch;
+		margin: 0 auto;
+		padding: 2em 1em;
+	}
+	h1 {
+		font-size: 2.5em;
+		margin-bottom: 0.5em;
+		background: linear-gradient(90deg, #6366f1, #8b5cf6);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+	}
+	.intro {
+		font-size: 1.2em;
+		color: rgb(var(--gray-dark));
+		margin-bottom: 2em;
+	}
+	h2 {
+		margin-top: 2em;
+		margin-bottom: 1em;
+		font-size: 1.5em;
+	}
+	ul {
+		line-height: 1.8;
+	}
+	.projects {
+		display: grid;
+		gap: 1.5em;
+		margin: 1.5em 0;
+	}
+	.project {
+		padding: 1.5em;
+		border: 1px solid rgb(var(--gray-light));
+		border-radius: 8px;
+		transition: transform 0.2s, box-shadow 0.2s;
+	}
+	.project:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	}
+	.project h3 {
+		margin-top: 0;
+		color: var(--accent);
+	}
+	a {
+		color: var(--accent);
+	}
+	@media (max-width: 600px) {
+		h1 {
+			font-size: 2em;
+		}
+	}
+</style>
