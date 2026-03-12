@@ -63,10 +63,16 @@ html[data-theme="dark"] body {
 	background: rgb(15, 23, 42);
 }
 main {
-	width: 720px;
-	max-width: calc(100% - 2em);
+	width: 100%;
+	max-width: 1200px;
 	margin: auto;
-	padding: 3em 1em;
+	padding: 2em 1em;
+}
+
+@media (max-width: 768px) {
+	main {
+		padding: 1em 0.75em;
+	}
 }
 h1,
 h2,

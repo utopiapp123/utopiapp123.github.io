@@ -41,9 +41,6 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 
 <style>
 	main {
-		max-width: 1200px;
-		margin: 0 auto;
-		padding: 2em 1em;
 		position: relative;
 		z-index: 1;
 	}
@@ -121,7 +118,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 		scroll-margin-top: 2em;
 	}
 	
-	@media (max-width: 600px) {
+	@media (max-width: 768px) {
 		main {
 			padding: 1em 0.75em;
 		}
@@ -154,6 +151,22 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 			max-width: 280px;
 			text-align: center;
 			padding: 0.9em 1.5em;
+		}
+	}
+	
+	@media (max-width: 480px) {
+		h1 {
+			font-size: 1.6em;
+		}
+		
+		.intro {
+			font-size: 0.95em;
+			line-height: 1.6;
+		}
+		
+		.hero {
+			padding: 1.5em 0;
+			margin-bottom: 1.5em;
 		}
 	}
 </style>
