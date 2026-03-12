@@ -15,7 +15,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 		<main class="profile-page">
 			<section class="profile-header">
 				<div class="avatar">
-					<div class="avatar-placeholder">👤</div>
+					<img src="https://ww-aibot-img-1258476243.cos.ap-guangzhou.myqcloud.com/J5Jgnzc/7616336549981772661?sign=q-sign-algorithm%3Dsha1%26q-ak%3DAKIDbBpaJvdLBvpnibcYcfyPuaO5f9U1UoGo%26q-sign-time%3D1773316541%3B1773316841%26q-key-time%3D1773316541%3B1773316841%26q-header-list%3D%26q-url-param-list%3D%26q-signature%3D74348e9d6ef0d1cfa461c889a7a298082faa00fa" alt="XuWeiJie" />
 				</div>
 				<h1>XuWeiJie</h1>
 				<p class="title">量子计算研究者 | 开发者</p>
@@ -139,16 +139,13 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 		margin-bottom: 1em;
 	}
 	
-	.avatar-placeholder {
+	.avatar img {
 		width: 120px;
 		height: 120px;
 		border-radius: 50%;
-		background: linear-gradient(135deg, #6366f1, #8b5cf6);
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		font-size: 4em;
-		margin: 0 auto;
+		object-fit: cover;
+		border: 3px solid rgb(var(--gray-light));
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 	}
 	
 	.profile-header h1 {
