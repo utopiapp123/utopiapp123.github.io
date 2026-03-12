@@ -2,10 +2,6 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import QuantumParticles from '../components/QuantumParticles.astro';
-import SkillsInteractive from '../components/SkillsInteractive.astro';
-import ProjectsShowcase from '../components/ProjectsShowcase.astro';
-import ContactForm from '../components/ContactForm.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 ---
 
@@ -16,161 +12,375 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 	</head>
 	<body>
 		<Header />
-		<QuantumParticles />
-		<main>
-			<section class="hero">
-				<h1>👋 Hello, I'm XuWeiJie</h1>
-				<p class="intro">
-					<strong>Quantum Computing Researcher | Developer | Explorer</strong> based in China.
-					Passionate about quantum algorithms, VQE/VQA, federated learning, and building the future of quantum-classical hybrid systems.
-				</p>
-				
-				<div class="hero-cta">
-					<a href="#projects" class="btn btn-primary">View Projects</a>
-					<a href="#contact" class="btn btn-secondary">Get in Touch</a>
+		<main class="profile-page">
+			<section class="profile-header">
+				<div class="avatar">
+					<div class="avatar-placeholder">👤</div>
+				</div>
+				<h1>XuWeiJie</h1>
+				<p class="title">量子计算研究者 | 开发者</p>
+				<p class="location">📍 中国</p>
+			</section>
+			
+			<nav class="quick-links">
+				<a href="#experience" class="nav-card">
+					<span class="nav-icon">📚</span>
+					<span class="nav-label">经历</span>
+				</a>
+				<a href="#achievements" class="nav-card">
+					<span class="nav-icon">🏆</span>
+					<span class="nav-label">成果</span>
+				</a>
+				<a href="#contributions" class="nav-card">
+					<span class="nav-icon">💻</span>
+					<span class="nav-label">贡献</span>
+				</a>
+				<a href="/blog" class="nav-card">
+					<span class="nav-icon">📝</span>
+					<span class="nav-label">博客</span>
+				</a>
+			</nav>
+			
+			<section id="experience" class="content-section">
+				<h2>📚 经历</h2>
+				<div class="timeline">
+					<div class="timeline-item">
+						<div class="timeline-dot"></div>
+						<div class="timeline-content">
+							<h3>量子计算研究</h3>
+							<p class="date">2024 - 至今</p>
+							<p>专注于变分量子算法（VQE/VQA）、量子联邦学习等方向的研究</p>
+						</div>
+					</div>
+					<div class="timeline-item">
+						<div class="timeline-dot"></div>
+						<div class="timeline-content">
+							<h3>开发者</h3>
+							<p class="date">2020 - 至今</p>
+							<p>全栈开发，擅长 Python、TypeScript、量子计算框架</p>
+						</div>
+					</div>
 				</div>
 			</section>
 			
-			<SkillsInteractive />
-			<ProjectsShowcase id="projects" />
-			<ContactForm id="contact" />
+			<section id="achievements" class="content-section">
+				<h2>🏆 成果</h2>
+				<div class="achievements-grid">
+					<div class="achievement-card">
+						<h3>量子分布式计算</h3>
+						<p>创建 quantum-distributed 仓库，整理量子分布式算法与协议</p>
+						<a href="https://github.com/utopiapp123/quantum-distributed" target="_blank">查看 →</a>
+					</div>
+					<div class="achievement-card">
+						<h3>量子联邦学习</h3>
+						<p>创建 quantum-federated-learning 仓库，研究隐私保护的量子机器学习</p>
+						<a href="https://github.com/utopiapp123/quantum-federated-learning" target="_blank">查看 →</a>
+					</div>
+				</div>
+			</section>
+			
+			<section id="contributions" class="content-section">
+				<h2>💻 贡献</h2>
+				<div class="contributions-list">
+					<div class="contribution-item">
+						<span class="repo-name">quantum-distributed</span>
+						<span class="contribution-type">创建者</span>
+					</div>
+					<div class="contribution-item">
+						<span class="repo-name">quantum-federated-learning</span>
+						<span class="contribution-type">创建者</span>
+					</div>
+					<div class="contribution-item">
+						<span class="repo-name">utopiapp123.github.io</span>
+						<span class="contribution-type">个人网站</span>
+					</div>
+					<div class="contribution-item">
+						<span class="repo-name">Qiskit</span>
+						<span class="contribution-type">Fork & 学习</span>
+					</div>
+					<div class="contribution-item">
+						<span class="repo-name">PennyLane</span>
+						<span class="contribution-type">Fork & 学习</span>
+					</div>
+				</div>
+			</section>
+			
+			<section class="contact-section">
+				<h2>📬 联系我</h2>
+				<div class="contact-links">
+					<a href="https://github.com/utopiapp123" class="contact-link" target="_blank">
+						<span>🐙</span> GitHub
+					</a>
+					<a href="/blog" class="contact-link">
+						<span>📝</span> 博客
+					</a>
+				</div>
+			</section>
 		</main>
 		<Footer />
 	</body>
 </html>
 
 <style>
-	main {
-		position: relative;
-		z-index: 1;
-		overflow-x: hidden;
-	}
-	
-	.hero {
-		text-align: center;
-		padding: 3em 0;
-		margin-bottom: 2em;
-		width: 100%;
-		max-width: 100%;
-	}
-	
-	h1 {
-		font-size: 3em;
-		margin-bottom: 0.5em;
-		background: linear-gradient(90deg, #6366f1, #8b5cf6, #ec4899);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-clip: text;
-		animation: gradient 3s ease infinite;
-		background-size: 200% 200%;
-	}
-	
-	@keyframes gradient {
-		0%, 100% { background-position: 0% 50%; }
-		50% { background-position: 100% 50%; }
-	}
-	
-	.intro {
-		font-size: 1.3em;
-		color: rgb(var(--gray-dark));
-		margin-bottom: 2em;
-		line-height: 1.8;
+	.profile-page {
 		max-width: 800px;
-		margin-left: auto;
-		margin-right: auto;
+		margin: 0 auto;
+		padding: 3em 1.5em;
 	}
 	
-	.hero-cta {
+	.profile-header {
+		text-align: center;
+		padding: 2em 0;
+		border-bottom: 1px solid rgb(var(--gray-light));
+		margin-bottom: 2em;
+	}
+	
+	.avatar {
+		margin-bottom: 1em;
+	}
+	
+	.avatar-placeholder {
+		width: 120px;
+		height: 120px;
+		border-radius: 50%;
+		background: linear-gradient(135deg, #6366f1, #8b5cf6);
 		display: flex;
-		gap: 1em;
+		align-items: center;
 		justify-content: center;
-		margin-top: 2em;
+		font-size: 4em;
+		margin: 0 auto;
 	}
 	
-	.btn {
-		padding: 1em 2em;
-		border-radius: 8px;
+	.profile-header h1 {
+		font-size: 2.5em;
+		margin: 0.5em 0;
+		color: rgb(var(--black));
+	}
+	
+	.title {
+		font-size: 1.2em;
+		color: rgb(var(--gray-dark));
+		margin-bottom: 0.5em;
+	}
+	
+	.location {
+		color: rgb(var(--gray));
+		font-size: 0.95em;
+	}
+	
+	.quick-links {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 1em;
+		margin-bottom: 3em;
+	}
+	
+	.nav-card {
+		background: white;
+		padding: 1.5em 1em;
+		border-radius: 12px;
+		text-align: center;
+		text-decoration: none;
+		color: inherit;
+		border: 1px solid rgb(var(--gray-light));
+		transition: all 0.3s;
+	}
+	
+	.nav-card:hover {
+		border-color: #6366f1;
+		transform: translateY(-2px);
+		box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
+	}
+	
+	.nav-icon {
+		font-size: 2em;
+		display: block;
+		margin-bottom: 0.5em;
+	}
+	
+	.nav-label {
+		font-weight: 600;
+		color: rgb(var(--black));
+	}
+	
+	.content-section {
+		margin-bottom: 3em;
+	}
+	
+	.content-section h2 {
+		font-size: 1.8em;
+		margin-bottom: 1.5em;
+		color: rgb(var(--black));
+		border-bottom: 2px solid rgb(var(--gray-light));
+		padding-bottom: 0.5em;
+	}
+	
+	.timeline {
+		position: relative;
+		padding-left: 2em;
+	}
+	
+	.timeline-item {
+		position: relative;
+		padding-bottom: 2em;
+	}
+	
+	.timeline-dot {
+		position: absolute;
+		left: -2em;
+		top: 0.5em;
+		width: 12px;
+		height: 12px;
+		border-radius: 50%;
+		background: #6366f1;
+	}
+	
+	.timeline-content h3 {
+		margin: 0 0 0.25em 0;
+		font-size: 1.2em;
+		color: rgb(var(--black));
+	}
+	
+	.timeline-content .date {
+		color: rgb(var(--gray));
+		font-size: 0.9em;
+		margin-bottom: 0.5em;
+	}
+	
+	.timeline-content p {
+		color: rgb(var(--gray-dark));
+		margin: 0;
+	}
+	
+	.achievements-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 1.5em;
+	}
+	
+	.achievement-card {
+		background: white;
+		padding: 1.5em;
+		border-radius: 12px;
+		border: 1px solid rgb(var(--gray-light));
+		transition: all 0.3s;
+	}
+	
+	.achievement-card:hover {
+		border-color: #6366f1;
+		box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
+	}
+	
+	.achievement-card h3 {
+		margin: 0 0 0.75em 0;
+		color: rgb(var(--black));
+	}
+	
+	.achievement-card p {
+		color: rgb(var(--gray-dark));
+		margin-bottom: 1em;
+		line-height: 1.6;
+	}
+	
+	.achievement-card a {
+		color: #6366f1;
 		text-decoration: none;
 		font-weight: 600;
-		transition: all 0.3s;
-		display: inline-block;
 	}
 	
-	.btn-primary {
-		background: linear-gradient(90deg, #6366f1, #8b5cf6);
-		color: white;
+	.contributions-list {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75em;
 	}
 	
-	.btn-primary:hover {
-		box-shadow: 0 4px 16px rgba(99, 102, 241, 0.4);
-		transform: translateY(-2px);
-	}
-	
-	.btn-secondary {
+	.contribution-item {
 		background: white;
-		color: var(--black);
-		border: 2px solid rgb(var(--gray-light));
+		padding: 1em 1.5em;
+		border-radius: 8px;
+		border: 1px solid rgb(var(--gray-light));
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
 	}
 	
-	.btn-secondary:hover {
-		border-color: #6366f1;
+	.repo-name {
+		font-weight: 600;
+		color: rgb(var(--black));
+	}
+	
+	.contribution-type {
+		background: rgb(var(--gray-light));
+		padding: 0.25em 0.75em;
+		border-radius: 12px;
+		font-size: 0.85em;
+		color: rgb(var(--gray-dark));
+	}
+	
+	.contact-section {
+		text-align: center;
+		padding: 2em 0;
+		border-top: 1px solid rgb(var(--gray-light));
+	}
+	
+	.contact-section h2 {
+		margin-bottom: 1em;
+	}
+	
+	.contact-links {
+		display: flex;
+		gap: 2em;
+		justify-content: center;
+	}
+	
+	.contact-link {
 		color: #6366f1;
+		text-decoration: none;
+		font-weight: 600;
+		font-size: 1.1em;
+		display: flex;
+		align-items: center;
+		gap: 0.5em;
 	}
 	
-	section {
-		scroll-margin-top: 2em;
+	.contact-link:hover {
+		color: #4f46e5;
 	}
 	
 	@media (max-width: 768px) {
-		.hero {
-			padding: 2em 0;
-			margin-bottom: 1.5em;
+		.profile-page {
+			padding: 2em 1em;
 		}
 		
-		h1 {
-			font-size: 1.8em;
-			line-height: 1.3;
+		.profile-header h1 {
+			font-size: 2em;
 		}
 		
-		.intro {
-			font-size: 1em;
-			padding: 0;
-			max-width: 100%;
+		.quick-links {
+			grid-template-columns: repeat(2, 1fr);
 		}
 		
-		.hero-cta {
+		.achievements-grid {
+			grid-template-columns: 1fr;
+		}
+		
+		.timeline {
+			padding-left: 1.5em;
+		}
+		
+		.timeline-dot {
+			left: -1.5em;
+		}
+		
+		.contribution-item {
 			flex-direction: column;
-			align-items: center;
-			gap: 0.75em;
-			width: 100%;
-			padding: 0;
-		}
-		
-		.btn {
-			width: 90%;
-			max-width: 300px;
+			gap: 0.5em;
 			text-align: center;
-			padding: 0.9em 1.5em;
-		}
-	}
-	
-	@media (max-width: 480px) {
-		h1 {
-			font-size: 1.6em;
 		}
 		
-		.intro {
-			font-size: 0.95em;
-			line-height: 1.6;
-		}
-		
-		.hero {
-			padding: 1.5em 0;
-			margin-bottom: 1em;
-		}
-		
-		.btn {
-			width: 100%;
+		.contact-links {
+			flex-direction: column;
+			gap: 1em;
 		}
 	}
 </style>
