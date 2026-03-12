@@ -12,7 +12,7 @@ const blog = defineCollection({
 			// Transform string to Date object
 			pubDate: z.coerce.date(),
 			updatedDate: z.coerce.date().optional(),
-			heroImage: image().optional(),
+			heroImage: image().optional().nullable(),
 			// 新增字段
 			category: z.string().optional().default('实验报告'),
 			tags: z.array(z.string()).optional(),
