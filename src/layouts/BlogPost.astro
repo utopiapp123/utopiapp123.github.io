@@ -8,79 +8,258 @@ import Header from '../components/Header.astro';
 
 type Props = CollectionEntry<'blog'>['data'];
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, category, tags } = Astro.props;
 ---
 
 <html lang="en">
 	<head>
-		<BaseHead title={title} description={description} />
-		<style>
-			main {
-				width: calc(100% - 2em);
-				max-width: 100%;
-				margin: 0;
-			}
-			.hero-image {
-				width: 100%;
-			}
-			.hero-image img {
-				display: block;
-				margin: 0 auto;
-				border-radius: 12px;
-				box-shadow: var(--box-shadow);
-			}
-			.prose {
-				width: 720px;
-				max-width: calc(100% - 2em);
-				margin: auto;
-				padding: 1em;
-				color: rgb(var(--gray-dark));
-			}
-			.title {
-				margin-bottom: 1em;
-				padding: 1em 0;
-				text-align: center;
-				line-height: 1;
-			}
-			.title h1 {
-				margin: 0 0 0.5em 0;
-			}
-			.date {
-				margin-bottom: 0.5em;
-				color: rgb(var(--gray));
-			}
-			.last-updated-on {
-				font-style: italic;
-			}
-		</style>
+		<BaseHead title={`${title} | ${SITE_TITLE}`} description={description} />
 	</head>
-
 	<body>
 		<Header />
-		<main>
+		<main class="article-page">
 			<article>
-				<div class="hero-image">
-					{heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
-				</div>
-				<div class="prose">
-					<div class="title">
-						<div class="date">
-							<FormattedDate date={pubDate} />
-							{
-								updatedDate && (
-									<div class="last-updated-on">
-										Last updated on <FormattedDate date={updatedDate} />
-									</div>
-								)
-							}
+				<div class="article-header">
+					{heroImage && (
+						<div class="hero-image">
+							<Image width={1020} height={510} src={heroImage} alt={title} />
 						</div>
-						<h1>{title}</h1>
-						<hr />
+					)}
+					<div class="article-meta">
+						{category && <span class="category-badge">{category}</span>}
+						<div class="dates">
+							<span class="pub-date"><FormattedDate date={pubDate} /></span>
+							{updatedDate && (
+								<span class="updated-date">· 更新于 <FormattedDate date={updatedDate} /></span>
+							)}
+						</div>
 					</div>
+					<h1>{title}</h1>
+					{tags && tags.length > 0 && (
+						<div class="tags">
+							{tags.map(tag => <span class="tag">#{tag}</span>)}
+						</div>
+					)}
+				</div>
+				
+				<div class="article-content">
 					<slot />
+				</div>
+				
+				<div class="article-footer">
+					<hr />
+					<div class="back-link">
+						<a href="/blog">← 返回实验报告列表</a>
+					</div>
 				</div>
 			</article>
 		</main>
 		<Footer />
 	</body>
 </html>
+
+<style>
+	.article-page {
+		max-width: 900px;
+		margin: 0 auto;
+		padding: 2em 1.5em;
+	}
+	
+	article {
+		background: white;
+		border-radius: 12px;
+		overflow: hidden;
+		box-shadow: 0 2px 8px rgba(var(--black), 5%);
+	}
+	
+	.article-header {
+		padding: 2em 2.5em;
+		border-bottom: 1px solid rgb(var(--gray-light));
+	}
+	
+	.hero-image {
+		margin: -2em -2.5em 2em;
+	}
+	
+	.hero-image img {
+		width: 100%;
+		height: auto;
+		display: block;
+	}
+	
+	.article-meta {
+		display: flex;
+		gap: 1em;
+		align-items: center;
+		margin-bottom: 1em;
+		flex-wrap: wrap;
+	}
+	
+	.category-badge {
+		background: linear-gradient(90deg, #6366f1, #8b5cf6);
+		color: white;
+		padding: 0.35em 1em;
+		border-radius: 20px;
+		font-size: 0.85em;
+		font-weight: 600;
+	}
+	
+	.dates {
+		color: rgb(var(--gray));
+		font-size: 0.9em;
+	}
+	
+	.updated-date {
+		font-style: italic;
+	}
+	
+	.article-header h1 {
+		margin: 0 0 1em 0;
+		font-size: 2.2em;
+		line-height: 1.2;
+		color: rgb(var(--black));
+	}
+	
+	.tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5em;
+	}
+	
+	.tag {
+		background: rgb(var(--gray-light));
+		color: rgb(var(--gray-dark));
+		padding: 0.35em 0.75em;
+		border-radius: 12px;
+		font-size: 0.85em;
+	}
+	
+	.article-content {
+		padding: 2.5em;
+		color: rgb(var(--gray-dark));
+		line-height: 1.8;
+	}
+	
+	.article-content :global(h2) {
+		margin-top: 2em;
+		margin-bottom: 1em;
+		color: rgb(var(--black));
+	}
+	
+	.article-content :global(h3) {
+		margin-top: 1.5em;
+		margin-bottom: 0.75em;
+		color: rgb(var(--black));
+	}
+	
+	.article-content :global(p) {
+		margin-bottom: 1.25em;
+	}
+	
+	.article-content :global(code) {
+		background: rgb(var(--gray-light));
+		padding: 0.2em 0.5em;
+		border-radius: 4px;
+		font-size: 0.9em;
+	}
+	
+	.article-content :global(pre) {
+		background: rgb(15, 23, 42);
+		color: #e2e8f0;
+		padding: 1.5em;
+		border-radius: 8px;
+		overflow-x: auto;
+		margin: 1.5em 0;
+	}
+	
+	.article-content :global(pre code) {
+		background: transparent;
+		padding: 0;
+		color: inherit;
+	}
+	
+	.article-content :global(blockquote) {
+		border-left: 4px solid #6366f1;
+		padding-left: 1.5em;
+		margin: 1.5em 0;
+		font-style: italic;
+		color: rgb(var(--gray-dark));
+	}
+	
+	.article-content :global(ul),
+	.article-content :global(ol) {
+		margin-bottom: 1.25em;
+		padding-left: 2em;
+	}
+	
+	.article-content :global(li) {
+		margin-bottom: 0.5em;
+	}
+	
+	.article-content :global(img) {
+		max-width: 100%;
+		height: auto;
+		border-radius: 8px;
+		margin: 1.5em 0;
+	}
+	
+	.article-content :global(table) {
+		width: 100%;
+		border-collapse: collapse;
+		margin: 1.5em 0;
+	}
+	
+	.article-content :global(th),
+	.article-content :global(td) {
+		border: 1px solid rgb(var(--gray-light));
+		padding: 0.75em;
+		text-align: left;
+	}
+	
+	.article-content :global(th) {
+		background: rgb(var(--gray-light));
+		font-weight: 600;
+	}
+	
+	.article-footer {
+		padding: 2em 2.5em;
+		background: rgb(var(--gray-light));
+	}
+	
+	.back-link a {
+		color: #6366f1;
+		text-decoration: none;
+		font-weight: 600;
+		transition: color 0.3s;
+	}
+	
+	.back-link a:hover {
+		color: #4f46e5;
+	}
+	
+	@media (max-width: 768px) {
+		.article-page {
+			padding: 1.5em 1em;
+		}
+		
+		.article-header {
+			padding: 1.5em;
+		}
+		
+		.hero-image {
+			margin: -1.5em -1.5em 1.5em;
+		}
+		
+		.article-header h1 {
+			font-size: 1.6em;
+		}
+		
+		.article-content {
+			padding: 1.5em;
+		}
+		
+		.article-footer {
+			padding: 1.5em;
+		}
+	}
+</style>

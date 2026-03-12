@@ -3,112 +3,395 @@ import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import BaseHead from '../../components/BaseHead.astro';
 import Footer from '../../components/Footer.astro';
-import FormattedDate from '../../components/FormattedDate.astro';
 import Header from '../../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
 
 const posts = (await getCollection('blog')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
+
+// 提取所有分类和标签
+const categories = [...new Set(posts.map(post => post.data.category || '其他'))];
+const allTags = [...new Set(posts.flatMap(post => post.data.tags || []))];
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-		<style>
-			main {
-				width: 960px;
-			}
-			ul {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 2rem;
-				list-style-type: none;
-				margin: 0;
-				padding: 0;
-			}
-			ul li {
-				width: calc(50% - 1rem);
-			}
-			ul li * {
-				text-decoration: none;
-				transition: 0.2s ease;
-			}
-			ul li:first-child {
-				width: 100%;
-				margin-bottom: 1rem;
-				text-align: center;
-			}
-			ul li:first-child img {
-				width: 100%;
-			}
-			ul li:first-child .title {
-				font-size: 2.369rem;
-			}
-			ul li img {
-				margin-bottom: 0.5rem;
-				border-radius: 12px;
-			}
-			ul li a {
-				display: block;
-			}
-			.title {
-				margin: 0;
-				color: rgb(var(--black));
-				line-height: 1;
-			}
-			.date {
-				margin: 0;
-				color: rgb(var(--gray));
-			}
-			ul li a:hover h4,
-			ul li a:hover .date {
-				color: rgb(var(--accent));
-			}
-			ul a:hover img {
-				box-shadow: var(--box-shadow);
-			}
-			@media (max-width: 720px) {
-				ul {
-					gap: 0.5em;
-				}
-				ul li {
-					width: 100%;
-					text-align: center;
-				}
-				ul li:first-child {
-					margin-bottom: 0;
-				}
-				ul li:first-child .title {
-					font-size: 1.563em;
-				}
-			}
-		</style>
+		<BaseHead title={`实验报告 & 笔记 | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
 	</head>
 	<body>
 		<Header />
-		<main>
-			<section>
-				<ul>
-					{
-						posts.map((post) => (
-							<li>
-								<a href={`/blog/${post.id}/`}>
-									{post.data.heroImage && (
-										<Image width={720} height={360} src={post.data.heroImage} alt="" />
-									)}
-									<h4 class="title">{post.data.title}</h4>
-									<p class="date">
-										<FormattedDate date={post.data.pubDate} />
-									</p>
-								</a>
-							</li>
-						))
-					}
-				</ul>
+		<main class="blog-page">
+			<section class="blog-header">
+				<h1>🔬 实验报告 & 笔记</h1>
+				<p class="intro">记录量子计算实验、学习笔记和技术探索</p>
+				
+				<div class="filter-controls">
+					<div class="filter-group">
+						<label>📁 分类</label>
+						<div class="filter-buttons" id="category-filters">
+							<button class="filter-btn active" data-filter="all" data-type="category">全部</button>
+							{categories.map(cat => (
+								<button class="filter-btn" data-filter={cat} data-type="category">{cat}</button>
+							))}
+						</div>
+					</div>
+					
+					<div class="filter-group">
+						<label>🏷️ 标签</label>
+						<div class="filter-buttons" id="tag-filters">
+							{allTags.map(tag => (
+								<button class="filter-btn tag-btn" data-filter={tag} data-type="tag">#{tag}</button>
+							))}
+						</div>
+					</div>
+				</div>
 			</section>
+			
+			<section class="posts-grid">
+				{posts.map((post) => (
+					<article class="post-card" data-category={post.data.category || '其他'} data-tags={(post.data.tags || []).join(' ')}>
+						<a href={`/blog/${post.id}/`}>
+							{post.data.heroImage ? (
+								<div class="post-image">
+									<Image width={400} height={200} src={post.data.heroImage} alt={post.data.title} />
+								</div>
+							) : (
+								<div class="post-image placeholder">
+									<span class="placeholder-icon">📄</span>
+								</div>
+							)}
+							<div class="post-content">
+								<div class="post-meta">
+									<span class="post-category">{post.data.category || '其他'}</span>
+									<span class="post-date">{post.data.pubDate.toLocaleDateString('zh-CN', { year: 'numeric', month: 'short', day: 'numeric' })}</span>
+								</div>
+								<h3 class="post-title">{post.data.title}</h3>
+								<p class="post-excerpt">{post.data.description}</p>
+								{post.data.tags && post.data.tags.length > 0 && (
+									<div class="post-tags">
+										{post.data.tags.map(tag => (
+											<span class="tag">#{tag}</span>
+										))}
+									</div>
+								)}
+							</div>
+						</a>
+					</article>
+				))}
+			</section>
+			
+			{posts.length === 0 && (
+				<div class="empty-state">
+					<span class="empty-icon">🚧</span>
+					<h2>暂无内容</h2>
+					<p>实验报告正在准备中，敬请期待！</p>
+				</div>
+			)}
 		</main>
 		<Footer />
 	</body>
 </html>
+
+<style>
+	.blog-page {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 2em 1.5em;
+	}
+	
+	.blog-header {
+		text-align: center;
+		margin-bottom: 3em;
+	}
+	
+	.blog-header h1 {
+		font-size: 2.5em;
+		margin-bottom: 0.5em;
+		background: linear-gradient(90deg, #6366f1, #8b5cf6);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+	}
+	
+	.intro {
+		font-size: 1.1em;
+		color: rgb(var(--gray-dark));
+		margin-bottom: 2em;
+	}
+	
+	.filter-controls {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5em;
+		align-items: center;
+	}
+	
+	.filter-group {
+		width: 100%;
+		max-width: 800px;
+	}
+	
+	.filter-group label {
+		display: block;
+		font-weight: 600;
+		margin-bottom: 0.75em;
+		color: rgb(var(--black));
+	}
+	
+	.filter-buttons {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5em;
+		justify-content: center;
+	}
+	
+	.filter-btn {
+		padding: 0.5em 1em;
+		border: 2px solid rgb(var(--gray-light));
+		background: white;
+		border-radius: 20px;
+		cursor: pointer;
+		transition: all 0.3s;
+		font-size: 0.9em;
+		font-weight: 500;
+	}
+	
+	.filter-btn:hover {
+		border-color: #6366f1;
+		color: #6366f1;
+		transform: translateY(-2px);
+	}
+	
+	.filter-btn.active {
+		background: linear-gradient(90deg, #6366f1, #8b5cf6);
+		color: white;
+		border-color: transparent;
+	}
+	
+	.tag-btn {
+		background: rgb(var(--gray-light));
+	}
+	
+	.posts-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+		gap: 2em;
+	}
+	
+	.post-card {
+		background: white;
+		border-radius: 12px;
+		overflow: hidden;
+		border: 1px solid rgb(var(--gray-light));
+		transition: all 0.3s;
+	}
+	
+	.post-card:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 8px 24px rgba(99, 102, 241, 0.15);
+		border-color: #6366f1;
+	}
+	
+	.post-card a {
+		text-decoration: none;
+		color: inherit;
+		display: block;
+	}
+	
+	.post-image {
+		width: 100%;
+		height: 200px;
+		overflow: hidden;
+		background: rgb(var(--gray-light));
+	}
+	
+	.post-image img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: transform 0.3s;
+	}
+	
+	.post-card:hover .post-image img {
+		transform: scale(1.05);
+	}
+	
+	.post-image.placeholder {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	
+	.placeholder-icon {
+		font-size: 4em;
+		opacity: 0.5;
+	}
+	
+	.post-content {
+		padding: 1.5em;
+	}
+	
+	.post-meta {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 0.75em;
+		font-size: 0.85em;
+	}
+	
+	.post-category {
+		background: linear-gradient(90deg, #6366f1, #8b5cf6);
+		color: white;
+		padding: 0.25em 0.75em;
+		border-radius: 12px;
+		font-weight: 500;
+	}
+	
+	.post-date {
+		color: rgb(var(--gray));
+	}
+	
+	.post-title {
+		margin: 0 0 0.75em 0;
+		font-size: 1.25em;
+		color: rgb(var(--black));
+		line-height: 1.3;
+	}
+	
+	.post-excerpt {
+		color: rgb(var(--gray-dark));
+		font-size: 0.95em;
+		line-height: 1.6;
+		margin-bottom: 1em;
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+	
+	.post-tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5em;
+	}
+	
+	.tag {
+		background: rgb(var(--gray-light));
+		color: rgb(var(--gray-dark));
+		padding: 0.25em 0.6em;
+		border-radius: 8px;
+		font-size: 0.8em;
+	}
+	
+	.empty-state {
+		text-align: center;
+		padding: 4em 2em;
+	}
+	
+	.empty-icon {
+		font-size: 5em;
+		display: block;
+		margin-bottom: 1em;
+	}
+	
+	.empty-state h2 {
+		margin-bottom: 0.5em;
+		color: rgb(var(--black));
+	}
+	
+	.empty-state p {
+		color: rgb(var(--gray-dark));
+	}
+	
+	@media (max-width: 768px) {
+		.blog-page {
+			padding: 1.5em 1em;
+		}
+		
+		.blog-header h1 {
+			font-size: 1.8em;
+		}
+		
+		.intro {
+			font-size: 1em;
+		}
+		
+		.filter-controls {
+			gap: 1em;
+		}
+		
+		.filter-group label {
+			font-size: 0.9em;
+		}
+		
+		.filter-btn {
+			padding: 0.4em 0.8em;
+			font-size: 0.85em;
+		}
+		
+		.posts-grid {
+			grid-template-columns: 1fr;
+			gap: 1.5em;
+		}
+		
+		.post-content {
+			padding: 1.25em;
+		}
+	}
+</style>
+
+<script>
+	// 分类和标签过滤功能
+	const filterBtns = document.querySelectorAll('.filter-btn');
+	const postCards = document.querySelectorAll('.post-card');
+	
+	let activeCategory = 'all';
+	let activeTag = null;
+	
+	filterBtns.forEach(btn => {
+		btn.addEventListener('click', () => {
+			const filterType = btn.getAttribute('data-type');
+			const filterValue = btn.getAttribute('data-filter');
+			
+			// 更新按钮状态
+			if (filterType === 'category') {
+				document.querySelectorAll('#category-filters .filter-btn').forEach(b => b.classList.remove('active'));
+				btn.classList.add('active');
+				activeCategory = filterValue;
+			} else {
+				// 标签可以多选
+				btn.classList.toggle('active');
+				activeTag = btn.classList.contains('active') ? filterValue : null;
+			}
+			
+			// 过滤文章
+			filterPosts();
+		});
+	});
+	
+	function filterPosts() {
+		postCards.forEach(card => {
+			const category = card.getAttribute('data-category');
+			const tags = card.getAttribute('data-tags');
+			
+			const matchCategory = activeCategory === 'all' || category === activeCategory;
+			const matchTag = !activeTag || tags.includes(activeTag);
+			
+			if (matchCategory && matchTag) {
+				card.style.display = 'block';
+				setTimeout(() => {
+					card.style.opacity = '1';
+					card.style.transform = 'translateY(0)';
+				}, 50);
+			} else {
+				card.style.opacity = '0';
+				card.style.transform = 'translateY(20px)';
+				setTimeout(() => {
+					card.style.display = 'none';
+				}, 300);
+			}
+		});
+	}
+</script>

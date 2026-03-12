@@ -13,6 +13,14 @@ const blog = defineCollection({
 			pubDate: z.coerce.date(),
 			updatedDate: z.coerce.date().optional(),
 			heroImage: image().optional(),
+			// 新增字段
+			category: z.string().optional().default('实验报告'),
+			tags: z.array(z.string()).optional(),
+			experiment: z.object({
+				date: z.string().optional(),
+				equipment: z.array(z.string()).optional(),
+				parameters: z.record(z.string()).optional(),
+			}).optional(),
 		}),
 });
 
