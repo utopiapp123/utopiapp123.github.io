@@ -141,8 +141,35 @@ import HeaderLink from './HeaderLink.astro';
 	}
 	
 	@media (max-width: 720px) {
-		.social-links {
+		header {
+			padding: 0 0.75em;
+		}
+		
+		nav {
+			gap: 0.5em;
+		}
+		
+		.internal-links {
 			display: none;
+		}
+		
+		.social-links {
+			gap: 0.3em;
+		}
+		
+		.theme-toggle {
+			width: 36px;
+			height: 36px;
+			margin-right: 0.3em;
+		}
+		
+		.social-links a svg {
+			width: 20px;
+			height: 20px;
+		}
+		
+		h2 a {
+			font-size: 0.95em;
 		}
 	}
 </style>

@@ -187,8 +187,56 @@ const categories = [...new Set(skills.map(s => s.category))];
   }
   
   @media (max-width: 600px) {
+    .skills-container {
+      margin: 1.5em 0;
+      padding: 0 0.75em;
+    }
+    
+    .skills-container h2 {
+      font-size: 1.3em;
+      margin-bottom: 1em;
+    }
+    
+    .category-filter {
+      justify-content: center;
+      gap: 0.4em;
+    }
+    
+    .filter-btn {
+      padding: 0.4em 0.8em;
+      font-size: 0.85em;
+    }
+    
     .skills-grid {
       grid-template-columns: 1fr;
+      gap: 0.75em;
+    }
+    
+    .skill-card {
+      padding: 1em;
+    }
+    
+    .skill-header {
+      flex-direction: column;
+      gap: 0.25em;
+    }
+    
+    .skill-name {
+      font-size: 0.95em;
+    }
+    
+    .skill-level {
+      font-size: 0.85em;
+    }
+    
+    .skill-bar {
+      height: 6px;
+      margin-bottom: 0.5em;
+    }
+    
+    .skill-category-tag {
+      font-size: 0.7em;
+      padding: 0.2em 0.6em;
     }
   }
 </style>
