@@ -1,115 +1,192 @@
 ---
-import Layout from '../layouts/BlogPost.astro';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_TITLE } from '../consts';
 ---
 
-<Layout
-	title="About Me"
-	description="Learn more about who I am and what I do"
-	pubDate={new Date()}
->
-	<h2>👋 About Me</h2>
-	
-	<p>
-		Hello! I'm <strong>[Your Name]</strong>, a [your role] based in [your location]. 
-		I'm passionate about [your passions] and love to [what you enjoy doing].
-	</p>
-	
-	<p>
-		[Write a paragraph about your background, experience, and what drives you. 
-		This is your chance to tell your story and connect with visitors.]
-	</p>
-	
-	<h2>💼 Experience</h2>
-	
-	<div class="timeline">
-		<div class="timeline-item">
-			<h3>[Job Title] @ [Company]</h3>
-			<p class="date">[Start Date] - [End Date/Present]</p>
-			<p>[Brief description of your role and achievements]</p>
-		</div>
-		
-		<div class="timeline-item">
-			<h3>[Job Title] @ [Company]</h3>
-			<p class="date">[Start Date] - [End Date]</p>
-			<p>[Brief description of your role and achievements]</p>
-		</div>
-	</div>
-	
-	<h2>🛠️ Skills</h2>
-	
-	<div class="skills">
-		<span class="skill-tag">[Skill 1]</span>
-		<span class="skill-tag">[Skill 2]</span>
-		<span class="skill-tag">[Skill 3]</span>
-		<span class="skill-tag">[Skill 4]</span>
-		<span class="skill-tag">[Skill 5]</span>
-		<span class="skill-tag">[Skill 6]</span>
-	</div>
-	
-	<h2>📚 Education</h2>
-	
-	<div class="education">
-		<h3>[Degree] in [Major]</h3>
-		<p>[University Name] | [Graduation Year]</p>
-	</div>
-	
-	<h2>🏆 Achievements</h2>
-	
-	<ul>
-		<li>[Achievement 1 - e.g., Award, certification, notable project]</li>
-		<li>[Achievement 2]</li>
-		<li>[Achievement 3]</li>
-	</ul>
-	
-	<h2>📬 Let's Connect</h2>
-	
-	<p>
-		I'm always interested in hearing about new projects and opportunities. 
-		Whether you have a question or just want to say hi, feel free to reach out!
-	</p>
-	
-	<p>
-		📧 Email: <a href="mailto:[your-email]">[your-email]</a><br/>
-		💼 LinkedIn: <a href="[linkedin-url]">[Your Profile]</a><br/>
-		🐙 GitHub: <a href="[github-url]">[Your Profile]</a><br/>
-		🐦 Twitter: <a href="[twitter-url]">[Your Profile]</a>
-	</p>
-</Layout>
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`About | ${SITE_TITLE}`} description="About XuWeiJie" />
+	</head>
+	<body>
+		<Header />
+		<main class="about-page">
+			<h1>👋 About Me</h1>
+			
+			<p class="intro">
+				Hello! I'm <strong>XuWeiJie</strong>, a Quantum Computing Researcher and Developer based in China.
+				I'm passionate about quantum algorithms, VQE/VQA, federated learning, and building the future of quantum-classical hybrid systems.
+			</p>
+			
+			<h2>💼 Experience</h2>
+			
+			<div class="timeline">
+				<div class="timeline-item">
+					<h3>量子计算研究者</h3>
+					<p class="date">2024 - 至今</p>
+					<p>专注于变分量子算法（VQE/VQA）、量子联邦学习等方向的研究</p>
+				</div>
+				
+				<div class="timeline-item">
+					<h3>全栈开发者</h3>
+					<p class="date">2020 - 至今</p>
+					<p>擅长 Python、TypeScript、量子计算框架，构建现代化应用</p>
+				</div>
+			</div>
+			
+			<h2>🛠️ Skills</h2>
+			
+			<div class="skills">
+				<span class="skill-tag">Quantum Computing</span>
+				<span class="skill-tag">VQE / VQA</span>
+				<span class="skill-tag">Qiskit</span>
+				<span class="skill-tag">Python</span>
+				<span class="skill-tag">TypeScript</span>
+				<span class="skill-tag">Machine Learning</span>
+				<span class="skill-tag">Web Development</span>
+			</div>
+			
+			<h2>🏆 Projects</h2>
+			
+			<ul>
+				<li><strong>quantum-distributed:</strong> 量子分布式计算算法与协议研究</li>
+				<li><strong>quantum-federated-learning:</strong> 量子联邦学习框架与隐私保护研究</li>
+				<li><strong>utopiapp123.github.io:</strong> 个人网站与实验报告平台</li>
+			</ul>
+			
+			<h2>📬 Let's Connect</h2>
+			
+			<p>
+				I'm always interested in hearing about new projects and opportunities. 
+				Whether you have a question or just want to say hi, feel free to reach out!
+			</p>
+			
+			<p class="contact-info">
+				🐙 GitHub: <a href="https://github.com/utopiapp123" target="_blank">@utopiapp123</a><br/>
+				📝 Blog: <a href="/blog">/blog</a>
+			</p>
+		</main>
+		<Footer />
+	</body>
+</html>
 
 <style>
+	.about-page {
+		max-width: 800px;
+		margin: 0 auto;
+		padding: 3em 1.5em;
+	}
+	
+	h1 {
+		font-size: 2.5em;
+		margin-bottom: 1em;
+		color: rgb(var(--black));
+	}
+	
+	.intro {
+		font-size: 1.1em;
+		line-height: 1.8;
+		color: rgb(var(--gray-dark));
+		margin-bottom: 2em;
+	}
+	
+	h2 {
+		font-size: 1.8em;
+		margin-top: 2em;
+		margin-bottom: 1em;
+		color: rgb(var(--black));
+		border-bottom: 2px solid rgb(var(--gray-light));
+		padding-bottom: 0.5em;
+	}
+	
 	.timeline {
 		margin: 1.5em 0;
 	}
+	
 	.timeline-item {
 		padding: 1em 0;
-		border-left: 3px solid var(--accent);
+		border-left: 3px solid #6366f1;
 		padding-left: 1.5em;
-		margin-bottom: 1em;
+		margin-bottom: 1.5em;
 	}
+	
 	.timeline-item h3 {
 		margin: 0 0 0.25em 0;
+		color: rgb(var(--black));
 	}
+	
 	.timeline-item .date {
 		color: rgb(var(--gray));
 		font-size: 0.9em;
 		margin: 0 0 0.5em 0;
 	}
+	
+	.timeline-item p {
+		color: rgb(var(--gray-dark));
+		margin: 0;
+		line-height: 1.6;
+	}
+	
 	.skills {
 		display: flex;
 		flex-wrap: wrap;
 		gap: 0.5em;
 		margin: 1em 0;
 	}
+	
 	.skill-tag {
-		background: rgb(var(--gray-light));
-		padding: 0.25em 0.75em;
-		border-radius: 999px;
+		background: linear-gradient(90deg, #6366f1, #8b5cf6);
+		color: white;
+		padding: 0.4em 1em;
+		border-radius: 20px;
 		font-size: 0.9em;
+		font-weight: 500;
 	}
-	.education {
-		margin: 1em 0;
+	
+	ul {
+		line-height: 2;
+		color: rgb(var(--gray-dark));
 	}
+	
+	.contact-info {
+		background: white;
+		padding: 1.5em;
+		border-radius: 12px;
+		border: 1px solid rgb(var(--gray-light));
+		line-height: 2.5;
+	}
+	
 	a {
-		color: var(--accent);
+		color: #6366f1;
+		text-decoration: none;
+	}
+	
+	a:hover {
+		text-decoration: underline;
+	}
+	
+	@media (max-width: 768px) {
+		.about-page {
+			padding: 2em 1em;
+		}
+		
+		h1 {
+			font-size: 2em;
+		}
+		
+		h2 {
+			font-size: 1.5em;
+		}
+		
+		.intro {
+			font-size: 1em;
+		}
+		
+		.skill-tag {
+			font-size: 0.85em;
+			padding: 0.35em 0.8em;
+		}
 	}
 </style>
