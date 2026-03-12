@@ -65,13 +65,21 @@ html[data-theme="dark"] body {
 main {
 	width: 100%;
 	max-width: 1200px;
-	margin: auto;
-	padding: 2em 1em;
+	margin: 0 auto;
+	padding: 2em 1.5em;
+	box-sizing: border-box;
 }
 
 @media (max-width: 768px) {
 	main {
-		padding: 1em 0.75em;
+		padding: 1em 1em;
+		max-width: 100%;
+	}
+}
+
+@media (max-width: 480px) {
+	main {
+		padding: 0.5em 0.75em;
 	}
 }
 h1,

@@ -157,6 +157,9 @@ const projects: Project[] = [
 <style>
   .projects-section {
     margin: 2em 0;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
   
   .projects-section h2 {
@@ -307,23 +310,28 @@ const projects: Project[] = [
     font-size: 0.9em;
   }
   
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
     .projects-section {
-      padding: 0 0.75em;
+      padding: 0;
+      width: 100%;
     }
     
     .projects-section h2 {
       font-size: 1.3em;
       margin-bottom: 1em;
+      padding: 0 0.5em;
     }
     
     .projects-grid {
       grid-template-columns: 1fr;
       gap: 1em;
+      padding: 0;
     }
     
     .project-card {
       border-radius: 12px;
+      width: 100%;
+      box-sizing: border-box;
     }
     
     .project-content {

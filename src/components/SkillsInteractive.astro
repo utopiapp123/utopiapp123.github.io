@@ -82,6 +82,9 @@ const categories = [...new Set(skills.map(s => s.category))];
 <style>
   .skills-container {
     margin: 2em 0;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
   
   .skills-container h2 {
@@ -186,20 +189,23 @@ const categories = [...new Set(skills.map(s => s.category))];
     color: rgb(var(--gray-dark));
   }
   
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
     .skills-container {
       margin: 1.5em 0;
-      padding: 0 0.75em;
+      padding: 0;
+      width: 100%;
     }
     
     .skills-container h2 {
       font-size: 1.3em;
       margin-bottom: 1em;
+      padding: 0 0.5em;
     }
     
     .category-filter {
       justify-content: center;
       gap: 0.4em;
+      padding: 0;
     }
     
     .filter-btn {
@@ -210,10 +216,13 @@ const categories = [...new Set(skills.map(s => s.category))];
     .skills-grid {
       grid-template-columns: 1fr;
       gap: 0.75em;
+      padding: 0;
     }
     
     .skill-card {
       padding: 1em;
+      width: 100%;
+      box-sizing: border-box;
     }
     
     .skill-header {

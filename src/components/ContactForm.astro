@@ -135,6 +135,9 @@
 <style>
   .contact-section {
     margin: 2em 0;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
   
   .contact-section h2 {
@@ -327,27 +330,33 @@
   
   @media (max-width: 768px) {
     .contact-section {
-      padding: 0 0.75em;
+      padding: 0;
+      width: 100%;
     }
     
     .contact-section h2 {
       font-size: 1.3em;
       margin-bottom: 0.5em;
+      padding: 0 0.5em;
     }
     
     .contact-intro {
       font-size: 0.95em;
       margin-bottom: 1.5em;
+      padding: 0 0.5em;
     }
     
     .contact-container {
       grid-template-columns: 1fr;
       gap: 1.5em;
+      padding: 0;
     }
     
     .contact-form,
     .contact-info {
       padding: 1.25em;
+      width: 100%;
+      box-sizing: border-box;
     }
     
     .form-group {
@@ -363,6 +372,7 @@
     .form-group textarea {
       font-size: 0.95em;
       padding: 0.7em 0.9em;
+      box-sizing: border-box;
     }
     
     .submit-btn {
