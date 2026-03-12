@@ -95,7 +95,7 @@ const projects: Project[] = [
 
 <script>
   // 获取 GitHub 仓库统计信息
-  async function fetchRepoStats(repoUrl: string) {
+  async function fetchRepoStats(repoUrl) {
     if (!repoUrl) return;
     
     const match = repoUrl.match(/github\.com\/([^/]+)\/([^/]+)/);
@@ -110,7 +110,9 @@ const projects: Project[] = [
       const card = document.querySelector(`[data-repo="${repoUrl}"]`)?.closest('.project-card');
       if (!card) return;
       
-      card.querySelector('.stat-value[data-repo]')?.textContent = data.stargazers_count?.toLocaleString() || '0';
+      const statValue = card.querySelector('.stat-value[data-repo]');
+      if (statValue) statValue.textContent = data.stargazers_count?.toLocaleString() || '0';
+      
       const forkElement = card.querySelectorAll('.stat-value')[1];
       if (forkElement) forkElement.textContent = data.forks_count?.toLocaleString() || '0';
       
@@ -132,7 +134,7 @@ const projects: Project[] = [
 
   // 卡片悬停 3D 效果
   document.querySelectorAll('.project-card').forEach(card => {
-    card.addEventListener('mousemove', (e: MouseEvent) => {
+    card.addEventListener('mousemove', (e) => {
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
