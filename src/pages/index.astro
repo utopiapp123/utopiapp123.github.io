@@ -2,6 +2,10 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
+import QuantumParticles from '../components/QuantumParticles.astro';
+import SkillsInteractive from '../components/SkillsInteractive.astro';
+import ProjectsShowcase from '../components/ProjectsShowcase.astro';
+import ContactForm from '../components/ContactForm.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 ---
 
@@ -12,40 +16,24 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 	</head>
 	<body>
 		<Header />
+		<QuantumParticles />
 		<main>
-			<h1>👋 Hello, I'm [Your Name]</h1>
-			<p class="intro">
-				[Your title/role, e.g., Developer | Designer | Creator] based in [Your Location].
-				Passionate about [your interests, e.g., building great products, open source, and sharing knowledge].
-			</p>
-			
-			<h2>🚀 What I Do</h2>
-			<ul>
-				<li><strong>[Skill 1]:</strong> [Brief description, e.g., Building web applications with React and Node.js]</li>
-				<li><strong>[Skill 2]:</strong> [Brief description, e.g., Designing user interfaces and experiences]</li>
-				<li><strong>[Skill 3]:</strong> [Brief description, e.g., Writing technical articles and tutorials]</li>
-			</ul>
-			
-			<h2>💼 Featured Projects</h2>
-			<div class="projects">
-				<div class="project">
-					<h3>[Project Name 1]</h3>
-					<p>[Brief description of your project]</p>
-					<p><a href="[project-link]">View Project →</a></p>
+			<section class="hero">
+				<h1>👋 Hello, I'm XuWeiJie</h1>
+				<p class="intro">
+					<strong>Quantum Computing Researcher | Developer | Explorer</strong> based in China.
+					Passionate about quantum algorithms, VQE/VQA, federated learning, and building the future of quantum-classical hybrid systems.
+				</p>
+				
+				<div class="hero-cta">
+					<a href="#projects" class="btn btn-primary">View Projects</a>
+					<a href="#contact" class="btn btn-secondary">Get in Touch</a>
 				</div>
-				<div class="project">
-					<h3>[Project Name 2]</h3>
-					<p>[Brief description of your project]</p>
-					<p><a href="[project-link]">View Project →</a></p>
-				</div>
-			</div>
+			</section>
 			
-			<h2>📬 Get in Touch</h2>
-			<p>
-				I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
-				Feel free to reach out via <a href="mailto:[your-email]">email</a> or connect on 
-				<a href="[github-profile]">GitHub</a> / <a href="[twitter-profile]">Twitter</a>.
-			</p>
+			<SkillsInteractive />
+			<ProjectsShowcase id="projects" />
+			<ContactForm id="contact" />
 		</main>
 		<Footer />
 	</body>
@@ -53,56 +41,98 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 
 <style>
 	main {
-		max-width: 68ch;
+		max-width: 1200px;
 		margin: 0 auto;
 		padding: 2em 1em;
+		position: relative;
+		z-index: 1;
 	}
+	
+	.hero {
+		text-align: center;
+		padding: 4em 0;
+		margin-bottom: 3em;
+	}
+	
 	h1 {
-		font-size: 2.5em;
+		font-size: 3em;
 		margin-bottom: 0.5em;
-		background: linear-gradient(90deg, #6366f1, #8b5cf6);
+		background: linear-gradient(90deg, #6366f1, #8b5cf6, #ec4899);
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
 		background-clip: text;
+		animation: gradient 3s ease infinite;
+		background-size: 200% 200%;
 	}
+	
+	@keyframes gradient {
+		0%, 100% { background-position: 0% 50%; }
+		50% { background-position: 100% 50%; }
+	}
+	
 	.intro {
-		font-size: 1.2em;
+		font-size: 1.3em;
 		color: rgb(var(--gray-dark));
 		margin-bottom: 2em;
-	}
-	h2 {
-		margin-top: 2em;
-		margin-bottom: 1em;
-		font-size: 1.5em;
-	}
-	ul {
 		line-height: 1.8;
+		max-width: 800px;
+		margin-left: auto;
+		margin-right: auto;
 	}
-	.projects {
-		display: grid;
-		gap: 1.5em;
-		margin: 1.5em 0;
+	
+	.hero-cta {
+		display: flex;
+		gap: 1em;
+		justify-content: center;
+		margin-top: 2em;
 	}
-	.project {
-		padding: 1.5em;
-		border: 1px solid rgb(var(--gray-light));
+	
+	.btn {
+		padding: 1em 2em;
 		border-radius: 8px;
-		transition: transform 0.2s, box-shadow 0.2s;
+		text-decoration: none;
+		font-weight: 600;
+		transition: all 0.3s;
+		display: inline-block;
 	}
-	.project:hover {
+	
+	.btn-primary {
+		background: linear-gradient(90deg, #6366f1, #8b5cf6);
+		color: white;
+	}
+	
+	.btn-primary:hover {
+		box-shadow: 0 4px 16px rgba(99, 102, 241, 0.4);
 		transform: translateY(-2px);
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 	}
-	.project h3 {
-		margin-top: 0;
-		color: var(--accent);
+	
+	.btn-secondary {
+		background: white;
+		color: var(--black);
+		border: 2px solid rgb(var(--gray-light));
 	}
-	a {
-		color: var(--accent);
+	
+	.btn-secondary:hover {
+		border-color: #6366f1;
+		color: #6366f1;
 	}
+	
+	section {
+		scroll-margin-top: 2em;
+	}
+	
 	@media (max-width: 600px) {
 		h1 {
 			font-size: 2em;
+		}
+		
+		.hero-cta {
+			flex-direction: column;
+			align-items: center;
+		}
+		
+		.intro {
+			font-size: 1.1em;
 		}
 	}
 </style>

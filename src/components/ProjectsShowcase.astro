@@ -1,0 +1,313 @@
+---
+// 交互式项目展示组件
+interface Project {
+  name: string;
+  description: string;
+  tags: string[];
+  link?: string;
+  github?: string;
+  featured?: boolean;
+}
+
+const projects: Project[] = [
+  {
+    name: 'Quantum Distributed Computing',
+    description: '量子分布式计算算法、协议与应用研究。探索量子计算在分布式系统中的创新应用。',
+    tags: ['Quantum', 'Distributed Systems', 'Research'],
+    link: 'https://github.com/utopiapp123/quantum-distributed',
+    github: 'https://github.com/utopiapp123/quantum-distributed',
+    featured: true
+  },
+  {
+    name: 'Quantum Federated Learning',
+    description: '量子联邦学习算法、框架与研究。结合量子计算与联邦学习的隐私保护机器学习。',
+    tags: ['Quantum', 'Machine Learning', 'Privacy'],
+    link: 'https://github.com/utopiapp123/quantum-federated-learning',
+    github: 'https://github.com/utopiapp123/quantum-federated-learning',
+    featured: true
+  },
+  {
+    name: 'Personal Website',
+    description: '基于 Astro 构建的现代化个人网站，支持深色模式、动画效果和响应式设计。',
+    tags: ['Astro', 'Web', 'Design'],
+    link: 'https://utopiapp123.github.io',
+    github: 'https://github.com/utopiapp123/utopiapp123.github.io',
+    featured: false
+  }
+];
+---
+
+<div class="projects-section">
+  <h2>💼 Featured Projects</h2>
+  
+  <div class="projects-grid">
+    {projects.map((project, index) => (
+      <article class={`project-card ${project.featured ? 'featured' : ''}`}>
+        <div class="project-content">
+          <div class="project-header">
+            <h3>{project.name}</h3>
+            {project.featured && <span class="featured-badge">⭐ Featured</span>}
+          </div>
+          
+          <p class="project-description">{project.description}</p>
+          
+          <div class="project-tags">
+            {project.tags.map(tag => (
+              <span class="tag">{tag}</span>
+            ))}
+          </div>
+          
+          <div class="project-links">
+            {project.link && (
+              <a href={project.link} class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+                <span>🔗</span> Live Demo
+              </a>
+            )}
+            {project.github && (
+              <a href={project.github} class="btn btn-secondary" target="_blank" rel="noopener noreferrer">
+                <span>🐙</span> GitHub
+              </a>
+            )}
+          </div>
+        </div>
+        
+        <div class="project-stats">
+          <div class="stat">
+            <span class="stat-icon">⭐</span>
+            <span class="stat-label">Stars</span>
+            <span class="stat-value" data-repo={project.github}>-</span>
+          </div>
+          <div class="stat">
+            <span class="stat-icon">🍴</span>
+            <span class="stat-label">Forks</span>
+            <span class="stat-value" data-repo={project.github}>-</span>
+          </div>
+          <div class="stat">
+            <span class="stat-icon">📅</span>
+            <span class="stat-label">Updated</span>
+            <span class="stat-value" data-repo={project.github}>-</span>
+          </div>
+        </div>
+      </article>
+    ))}
+  </div>
+</div>
+
+<script>
+  // 获取 GitHub 仓库统计信息
+  async function fetchRepoStats(repoUrl: string) {
+    if (!repoUrl) return;
+    
+    const match = repoUrl.match(/github\.com\/([^/]+)\/([^/]+)/);
+    if (!match) return;
+    
+    const [, owner, repo] = match;
+    
+    try {
+      const response = await fetch(`https://api.github.com/repos/${owner}/${repo}`);
+      const data = await response.json();
+      
+      const card = document.querySelector(`[data-repo="${repoUrl}"]`)?.closest('.project-card');
+      if (!card) return;
+      
+      card.querySelector('.stat-value[data-repo]')?.textContent = data.stargazers_count?.toLocaleString() || '0';
+      const forkElement = card.querySelectorAll('.stat-value')[1];
+      if (forkElement) forkElement.textContent = data.forks_count?.toLocaleString() || '0';
+      
+      const dateElement = card.querySelectorAll('.stat-value')[2];
+      if (dateElement && data.updated_at) {
+        const date = new Date(data.updated_at);
+        dateElement.textContent = date.toLocaleDateString('zh-CN', { month: 'short', day: 'numeric' });
+      }
+    } catch (error) {
+      console.error('Failed to fetch repo stats:', error);
+    }
+  }
+
+  // 初始化
+  document.querySelectorAll('[data-repo]').forEach(el => {
+    const repoUrl = el.getAttribute('data-repo');
+    if (repoUrl) fetchRepoStats(repoUrl);
+  });
+
+  // 卡片悬停 3D 效果
+  document.querySelectorAll('.project-card').forEach(card => {
+    card.addEventListener('mousemove', (e: MouseEvent) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      
+      const rotateX = (y - centerY) / 20;
+      const rotateY = (centerX - x) / 20;
+      
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+    });
+    
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+    });
+  });
+</script>
+
+<style>
+  .projects-section {
+    margin: 2em 0;
+  }
+  
+  .projects-section h2 {
+    margin-bottom: 1.5em;
+    background: linear-gradient(90deg, #6366f1, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5em;
+  }
+  
+  .project-card {
+    background: white;
+    border-radius: 16px;
+    border: 1px solid rgb(var(--gray-light));
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+  }
+  
+  .project-card:hover {
+    box-shadow: 0 12px 32px rgba(99, 102, 241, 0.2);
+    border-color: #6366f1;
+  }
+  
+  .project-card.featured {
+    border-width: 2px;
+    border-color: #fbbf24;
+  }
+  
+  .featured-badge {
+    background: linear-gradient(90deg, #fbbf24, #f59e0b);
+    color: white;
+    padding: 0.25em 0.75em;
+    border-radius: 12px;
+    font-size: 0.75em;
+    font-weight: 600;
+  }
+  
+  .project-content {
+    padding: 1.5em;
+  }
+  
+  .project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1em;
+  }
+  
+  .project-header h3 {
+    margin: 0;
+    color: var(--black);
+    font-size: 1.25em;
+  }
+  
+  .project-description {
+    color: rgb(var(--gray-dark));
+    line-height: 1.6;
+    margin-bottom: 1em;
+  }
+  
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+    margin-bottom: 1.25em;
+  }
+  
+  .tag {
+    background: rgb(var(--gray-light));
+    color: rgb(var(--gray-dark));
+    padding: 0.25em 0.75em;
+    border-radius: 12px;
+    font-size: 0.8em;
+    font-weight: 500;
+  }
+  
+  .project-links {
+    display: flex;
+    gap: 0.75em;
+  }
+  
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    padding: 0.6em 1.2em;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s;
+    font-size: 0.9em;
+  }
+  
+  .btn-primary {
+    background: linear-gradient(90deg, #6366f1, #8b5cf6);
+    color: white;
+  }
+  
+  .btn-primary:hover {
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+    transform: translateY(-2px);
+  }
+  
+  .btn-secondary {
+    background: rgb(var(--gray-light));
+    color: var(--black);
+  }
+  
+  .btn-secondary:hover {
+    background: rgb(var(--gray-dark));
+    color: white;
+  }
+  
+  .project-stats {
+    display: flex;
+    justify-content: space-around;
+    padding: 1em 1.5em;
+    background: rgb(var(--gray-light));
+    border-top: 1px solid rgb(var(--gray-light));
+  }
+  
+  .stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25em;
+  }
+  
+  .stat-icon {
+    font-size: 1.2em;
+  }
+  
+  .stat-label {
+    font-size: 0.75em;
+    color: rgb(var(--gray-dark));
+  }
+  
+  .stat-value {
+    font-weight: 600;
+    color: #6366f1;
+    font-size: 0.9em;
+  }
+  
+  @media (max-width: 600px) {
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

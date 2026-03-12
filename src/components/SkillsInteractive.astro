@@ -1,0 +1,194 @@
+---
+// 交互式技能展示组件
+interface Skill {
+  name: string;
+  level: number;
+  category: string;
+  icon?: string;
+}
+
+const skills: Skill[] = [
+  { name: 'Quantum Computing', level: 85, category: 'Quantum' },
+  { name: 'VQE / VQA', level: 80, category: 'Quantum' },
+  { name: 'Qiskit', level: 75, category: 'Quantum' },
+  { name: 'Python', level: 90, category: 'Programming' },
+  { name: 'TypeScript', level: 80, category: 'Programming' },
+  { name: 'Machine Learning', level: 75, category: 'AI' },
+  { name: 'Web Development', level: 70, category: 'Web' },
+  { name: 'Astro', level: 65, category: 'Web' },
+];
+
+const categories = [...new Set(skills.map(s => s.category))];
+---
+
+<div class="skills-container">
+  <h2>🛠️ Skills & Expertise</h2>
+  
+  <div class="category-filter">
+    <button class="filter-btn active" data-category="all">All</button>
+    {categories.map(cat => (
+      <button class="filter-btn" data-category={cat}>{cat}</button>
+    ))}
+  </div>
+  
+  <div class="skills-grid">
+    {skills.map((skill, index) => (
+      <div class="skill-card" data-category={skill.category}>
+        <div class="skill-header">
+          <span class="skill-name">{skill.name}</span>
+          <span class="skill-level">{skill.level}%</span>
+        </div>
+        <div class="skill-bar">
+          <div class="skill-progress" style={`width: ${skill.level}%; transition-delay: ${index * 0.1}s`}></div>
+        </div>
+        <div class="skill-category-tag">{skill.category}</div>
+      </div>
+    ))}
+  </div>
+</div>
+
+<script>
+  // 分类过滤功能
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      
+      const category = btn.getAttribute('data-category');
+      document.querySelectorAll('.skill-card').forEach(card => {
+        if (category === 'all' || card.getAttribute('data-category') === category) {
+          card.style.display = 'block';
+          setTimeout(() => card.style.opacity = '1', 50);
+        } else {
+          card.style.opacity = '0';
+          setTimeout(() => card.style.display = 'none', 300);
+        }
+      });
+    });
+  });
+
+  // 进度条动画
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate');
+      }
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll('.skill-progress').forEach(bar => observer.observe(bar));
+</script>
+
+<style>
+  .skills-container {
+    margin: 2em 0;
+  }
+  
+  .skills-container h2 {
+    margin-bottom: 1.5em;
+    background: linear-gradient(90deg, #6366f1, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .category-filter {
+    display: flex;
+    gap: 0.5em;
+    margin-bottom: 1.5em;
+    flex-wrap: wrap;
+  }
+  
+  .filter-btn {
+    padding: 0.5em 1em;
+    border: 2px solid rgb(var(--gray-light));
+    background: white;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 0.9em;
+  }
+  
+  .filter-btn:hover {
+    border-color: #6366f1;
+    color: #6366f1;
+  }
+  
+  .filter-btn.active {
+    background: linear-gradient(90deg, #6366f1, #8b5cf6);
+    color: white;
+    border-color: transparent;
+  }
+  
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1em;
+  }
+  
+  .skill-card {
+    background: white;
+    padding: 1.25em;
+    border-radius: 12px;
+    border: 1px solid rgb(var(--gray-light));
+    transition: all 0.3s;
+    opacity: 1;
+  }
+  
+  .skill-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(99, 102, 241, 0.15);
+    border-color: #6366f1;
+  }
+  
+  .skill-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.75em;
+  }
+  
+  .skill-name {
+    font-weight: 600;
+    color: var(--black);
+  }
+  
+  .skill-level {
+    color: #6366f1;
+    font-weight: 600;
+  }
+  
+  .skill-bar {
+    height: 8px;
+    background: rgb(var(--gray-light));
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 0.75em;
+  }
+  
+  .skill-progress {
+    height: 100%;
+    background: linear-gradient(90deg, #6366f1, #8b5cf6);
+    border-radius: 4px;
+    width: 0;
+    transition: width 1s ease-out;
+  }
+  
+  .skill-card.animate .skill-progress {
+    width: var(--width);
+  }
+  
+  .skill-category-tag {
+    display: inline-block;
+    font-size: 0.75em;
+    padding: 0.25em 0.75em;
+    background: rgb(var(--gray-light));
+    border-radius: 12px;
+    color: rgb(var(--gray-dark));
+  }
+  
+  @media (max-width: 600px) {
+    .skills-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
