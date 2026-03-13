@@ -13,33 +13,35 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 	<body>
 		<Header />
 		<main class="profile-page">
-			<section class="profile-header">
-				<div class="avatar">
-					<img src="https://ww-aibot-img-1258476243.cos.ap-guangzhou.myqcloud.com/J5Jgnzc/7616336549981772661?sign=q-sign-algorithm%3Dsha1%26q-ak%3DAKIDbBpaJvdLBvpnibcYcfyPuaO5f9U1UoGo%26q-sign-time%3D1773316541%3B1773316841%26q-key-time%3D1773316541%3B1773316841%26q-header-list%3D%26q-url-param-list%3D%26q-signature%3D74348e9d6ef0d1cfa461c889a7a298082faa00fa" alt="XuWeiJie" />
+			<section class="profile-header-layout">
+				<div class="profile-header">
+					<div class="avatar">
+						<img src="https://ww-aibot-img-1258476243.cos.ap-guangzhou.myqcloud.com/J5Jgnzc/7616336549981772661?sign=q-sign-algorithm%3Dsha1%26q-ak%3DAKIDbBpaJvdLBvpnibcYcfyPuaO5f9U1UoGo%26q-sign-time%3D1773316541%3B1773316841%26q-key-time%3D1773316541%3B1773316841%26q-header-list%3D%26q-url-param-list%3D%26q-signature%3D74348e9d6ef0d1cfa461c889a7a298082faa00fa" alt="XuWeiJie" />
+					</div>
+					<h1>XuWeiJie</h1>
+					<p class="title">量子计算研究者 | 开发者</p>
+					<p class="location">📍 中国</p>
 				</div>
-				<h1>XuWeiJie</h1>
-				<p class="title">量子计算研究者 | 开发者</p>
-				<p class="location">📍 中国</p>
+				
+				<nav class="quick-links">
+					<a href="#experience" class="nav-card">
+						<span class="nav-icon">📚</span>
+						<span class="nav-label">经历</span>
+					</a>
+					<a href="#achievements" class="nav-card">
+						<span class="nav-icon">🏆</span>
+						<span class="nav-label">成果</span>
+					</a>
+					<a href="#contributions" class="nav-card">
+						<span class="nav-icon">💻</span>
+						<span class="nav-label">贡献</span>
+					</a>
+					<a href="/blog" class="nav-card">
+						<span class="nav-icon">📝</span>
+						<span class="nav-label">博客</span>
+					</a>
+				</nav>
 			</section>
-			
-			<nav class="quick-links">
-				<a href="#experience" class="nav-card">
-					<span class="nav-icon">📚</span>
-					<span class="nav-label">经历</span>
-				</a>
-				<a href="#achievements" class="nav-card">
-					<span class="nav-icon">🏆</span>
-					<span class="nav-label">成果</span>
-				</a>
-				<a href="#contributions" class="nav-card">
-					<span class="nav-icon">💻</span>
-					<span class="nav-label">贡献</span>
-				</a>
-				<a href="/blog" class="nav-card">
-					<span class="nav-icon">📝</span>
-					<span class="nav-label">博客</span>
-				</a>
-			</nav>
 			
 			<section id="experience" class="content-section">
 				<h2>📚 经历</h2>
@@ -123,16 +125,23 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 
 <style>
 	.profile-page {
-		max-width: 800px;
+		max-width: 1000px;
 		margin: 0 auto;
 		padding: 3em 1.5em;
 	}
 	
-	.profile-header {
-		text-align: center;
+	.profile-header-layout {
+		display: flex;
+		gap: 3em;
+		align-items: flex-start;
 		padding: 2em 0;
 		border-bottom: 1px solid rgb(var(--gray-light));
 		margin-bottom: 2em;
+	}
+	
+	.profile-header {
+		flex: 0 0 280px;
+		text-align: center;
 	}
 	
 	.avatar {
@@ -140,22 +149,22 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 	}
 	
 	.avatar img {
-		width: 120px;
-		height: 120px;
+		width: 180px;
+		height: 180px;
 		border-radius: 50%;
 		object-fit: cover;
-		border: 3px solid rgb(var(--gray-light));
+		border: 4px solid rgb(var(--gray-light));
 		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 	}
 	
 	.profile-header h1 {
-		font-size: 2.5em;
+		font-size: 2em;
 		margin: 0.5em 0;
 		color: rgb(var(--black));
 	}
 	
 	.title {
-		font-size: 1.2em;
+		font-size: 1.1em;
 		color: rgb(var(--gray-dark));
 		margin-bottom: 0.5em;
 	}
@@ -166,10 +175,10 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 	}
 	
 	.quick-links {
+		flex: 1;
 		display: grid;
-		grid-template-columns: repeat(4, 1fr);
+		grid-template-columns: repeat(2, 1fr);
 		gap: 1em;
-		margin-bottom: 3em;
 	}
 	
 	.nav-card {
@@ -349,12 +358,29 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 			padding: 2em 1em;
 		}
 		
+		.profile-header-layout {
+			flex-direction: column;
+			align-items: center;
+			gap: 2em;
+		}
+		
+		.profile-header {
+			flex: none;
+			width: 100%;
+		}
+		
 		.profile-header h1 {
 			font-size: 2em;
 		}
 		
+		.avatar img {
+			width: 140px;
+			height: 140px;
+		}
+		
 		.quick-links {
 			grid-template-columns: repeat(2, 1fr);
+			width: 100%;
 		}
 		
 		.achievements-grid {
