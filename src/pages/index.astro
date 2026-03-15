@@ -22,25 +22,6 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 					<p class="title">量子计算研究者 | 开发者</p>
 					<p class="location">📍 中国</p>
 				</div>
-				
-				<nav class="quick-links">
-					<a href="#experience" class="nav-card">
-						<span class="nav-icon">📚</span>
-						<span class="nav-label">经历</span>
-					</a>
-					<a href="#achievements" class="nav-card">
-						<span class="nav-icon">🏆</span>
-						<span class="nav-label">成果</span>
-					</a>
-					<a href="#contributions" class="nav-card">
-						<span class="nav-icon">💻</span>
-						<span class="nav-label">贡献</span>
-					</a>
-					<a href="/blog" class="nav-card">
-						<span class="nav-icon">📝</span>
-						<span class="nav-label">博客</span>
-					</a>
-				</nav>
 			</section>
 			
 			<section id="experience" class="content-section">
@@ -132,15 +113,14 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 	
 	.profile-header-layout {
 		display: flex;
-		gap: 3em;
-		align-items: flex-start;
+		flex-direction: column;
+		align-items: center;
 		padding: 2em 0;
 		border-bottom: 1px solid rgb(var(--gray-light));
 		margin-bottom: 2em;
 	}
 	
 	.profile-header {
-		flex: 0 0 280px;
 		text-align: center;
 	}
 	
@@ -172,41 +152,6 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 	.location {
 		color: rgb(var(--gray));
 		font-size: 0.95em;
-	}
-	
-	.quick-links {
-		flex: 1;
-		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		gap: 1em;
-	}
-	
-	.nav-card {
-		background: white;
-		padding: 1.5em 1em;
-		border-radius: 12px;
-		text-align: center;
-		text-decoration: none;
-		color: inherit;
-		border: 1px solid rgb(var(--gray-light));
-		transition: all 0.3s;
-	}
-	
-	.nav-card:hover {
-		border-color: #6366f1;
-		transform: translateY(-2px);
-		box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
-	}
-	
-	.nav-icon {
-		font-size: 2em;
-		display: block;
-		margin-bottom: 0.5em;
-	}
-	
-	.nav-label {
-		font-weight: 600;
-		color: rgb(var(--black));
 	}
 	
 	.content-section {
@@ -376,11 +321,6 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 		.avatar img {
 			width: 140px;
 			height: 140px;
-		}
-		
-		.quick-links {
-			grid-template-columns: repeat(2, 1fr);
-			width: 100%;
 		}
 		
 		.achievements-grid {
