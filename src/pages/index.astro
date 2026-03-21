@@ -9,88 +9,132 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
 	<body>
-		<main>
-			<header>
+		<div class="container">
+			<div class="profile">
 				<img src="https://ww-aibot-img-1258476243.cos.ap-guangzhou.myqcloud.com/J5Jgnzc/7616336549981772661?sign=q-sign-algorithm%3Dsha1%26q-ak%3DAKIDbBpaJvdLBvpnibcYcfyPuaO5f9U1UoGo%26q-sign-time%3D1773316541%3B1773316841%26q-key-time%3D1773316541%3B1773316841%26q-header-list%3D%26q-url-param-list%3D%26q-signature%3D74348e9d6ef0d1cfa461c889a7a298082faa00fa" alt="XuWeiJie" />
-				<h1>XuWeiJie</h1>
-				<p class="title">量子计算研究者 | 开发者</p>
-				<p class="location">📍 中国</p>
-			</header>
+				<div>
+					<h1>XuWeiJie</h1>
+					<p class="position">量子计算研究者</p>
+					<p class="contact">
+						📧 <a href="mailto:your-email@example.com">Email</a> · 
+						🐙 <a href="https://github.com/utopiapp123">GitHub</a> · 
+						📍 中国
+					</p>
+				</div>
+			</div>
 			
 			<section>
-				<h2>📚 经历</h2>
-				<div class="timeline">
-					<div class="item">
-						<h3>量子计算研究</h3>
-						<p class="date">2024 - 至今</p>
-						<p>专注于变分量子算法（VQE/VQA）、量子联邦学习</p>
-					</div>
-					<div class="item">
-						<h3>开发者</h3>
-						<p class="date">2020 - 至今</p>
-						<p>全栈开发，Python、TypeScript、量子计算框架</p>
-					</div>
+				<h2>Research</h2>
+				<p>我专注于量子计算领域的前沿研究，主要研究方向包括：</p>
+				<ul class="research-interests">
+					<li>变分量子算法（VQE/VQA）</li>
+					<li>量子联邦学习</li>
+					<li>量子分布式计算</li>
+					<li>量子机器学习</li>
+				</ul>
+			</section>
+			
+			<section>
+				<h2>Publications</h2>
+				<div class="publication">
+					<p class="pub-title">Quantum Distributed Computing: Algorithms and Protocols</p>
+					<p class="pub-authors"><strong>XuWeiJie</strong></p>
+					<p class="pub-venue">GitHub, 2026</p>
+					<p class="pub-links"><a href="https://github.com/utopiapp123/quantum-distributed" target="_blank" rel="noopener">[Code]</a></p>
+				</div>
+				<div class="publication">
+					<p class="pub-title">Quantum Federated Learning: Privacy-Preserving Quantum Machine Learning</p>
+					<p class="pub-authors"><strong>XuWeiJie</strong></p>
+					<p class="pub-venue">GitHub, 2026</p>
+					<p class="pub-links"><a href="https://github.com/utopiapp123/quantum-federated-learning" target="_blank" rel="noopener">[Code]</a></p>
 				</div>
 			</section>
 			
 			<section>
-				<h2>🏆 项目</h2>
-				<div class="projects">
-					<a href="https://github.com/utopiapp123/quantum-distributed" target="_blank" rel="noopener">
-						<strong>量子分布式计算</strong>
-						<span>量子分布式算法与协议</span>
-					</a>
-					<a href="https://github.com/utopiapp123/quantum-federated-learning" target="_blank" rel="noopener">
-						<strong>量子联邦学习</strong>
-						<span>隐私保护的量子机器学习</span>
-					</a>
+				<h2>Experience</h2>
+				<div class="experience-item">
+					<p class="exp-title">量子计算研究</p>
+					<p class="exp-meta">2024 - 至今</p>
+					<p class="exp-desc">专注于变分量子算法、量子联邦学习等方向的研究</p>
+				</div>
+				<div class="experience-item">
+					<p class="exp-title">全栈开发者</p>
+					<p class="exp-meta">2020 - 至今</p>
+					<p class="exp-desc">Python、TypeScript、量子计算框架</p>
 				</div>
 			</section>
 			
 			<footer>
-				<a href="https://github.com/utopiapp123" target="_blank" rel="noopener">GitHub</a>
-				<a href="/blog">博客</a>
+				<p>&copy; 2026 XuWeiJie. Built with Astro.</p>
 			</footer>
-		</main>
+		</div>
 	</body>
 </html>
 
 <style>
+	* {
+		box-sizing: border-box;
+	}
+	
 	body {
-		font-family: 'Atkinson', sans-serif;
-		max-width: 680px;
+		font-family: 'Georgia', 'Times New Roman', serif;
+		background: #fafafa;
+		color: #333;
+		line-height: 1.6;
+		margin: 0;
+		padding: 0;
+	}
+	
+	.container {
+		max-width: 800px;
 		margin: 0 auto;
 		padding: 3em 1.5em;
-		line-height: 1.6;
 	}
 	
-	header {
-		text-align: center;
+	.profile {
+		display: flex;
+		gap: 2em;
+		align-items: flex-start;
 		padding-bottom: 2em;
-		margin-bottom: 2em;
-		border-bottom: 1px solid rgb(var(--gray-light));
+		margin-bottom: 2.5em;
+		border-bottom: 2px solid #ddd;
 	}
 	
-	header img {
-		width: 120px;
-		height: 120px;
-		border-radius: 50%;
-		margin-bottom: 1em;
+	.profile img {
+		width: 160px;
+		height: 160px;
+		border-radius: 4px;
+		object-fit: cover;
+		border: 1px solid #ddd;
+		flex-shrink: 0;
 	}
 	
-	header h1 {
-		margin: 0.5em 0;
-		color: rgb(var(--black));
+	.profile h1 {
+		font-size: 2em;
+		margin: 0 0 0.3em 0;
+		color: #222;
+		font-weight: normal;
 	}
 	
-	.title {
-		color: rgb(var(--gray-dark));
-		margin: 0.5em 0;
+	.position {
+		font-size: 1.1em;
+		color: #666;
+		margin: 0 0 0.8em 0;
 	}
 	
-	.location {
-		color: rgb(var(--gray));
-		font-size: 0.9em;
+	.contact {
+		font-size: 0.95em;
+		color: #555;
+		margin: 0;
+	}
+	
+	.contact a {
+		color: #0d9488;
+		text-decoration: none;
+	}
+	
+	.contact a:hover {
+		text-decoration: underline;
 	}
 	
 	section {
@@ -98,90 +142,110 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 	}
 	
 	h2 {
-		font-size: 1.4em;
-		margin-bottom: 1em;
-		color: rgb(var(--black));
+		font-size: 1.5em;
+		margin: 0 0 1em 0;
+		color: #222;
+		font-weight: normal;
+		border-bottom: 1px solid #eee;
+		padding-bottom: 0.5em;
 	}
 	
-	.timeline .item {
+	p {
+		margin: 0 0 1em 0;
+	}
+	
+	.research-interests {
+		padding-left: 1.5em;
+	}
+	
+	.research-interests li {
+		margin-bottom: 0.5em;
+	}
+	
+	.publication {
 		margin-bottom: 1.5em;
+		padding-left: 1em;
+		border-left: 3px solid #0d9488;
 	}
 	
-	.timeline h3 {
-		margin: 0 0 0.3em 0;
-		font-size: 1.1em;
-	}
-	
-	.date {
-		color: rgb(var(--gray));
-		font-size: 0.85em;
-		margin: 0 0 0.5em 0;
-	}
-	
-	.timeline p {
-		margin: 0;
-		color: rgb(var(--gray-dark));
-	}
-	
-	.projects {
-		display: flex;
-		flex-direction: column;
-		gap: 0.8em;
-	}
-	
-	.projects a {
-		display: block;
-		padding: 1em;
-		background: white;
-		border: 1px solid rgb(var(--gray-light));
-		border-radius: 8px;
-		text-decoration: none;
-		color: inherit;
-		transition: all 0.2s;
-	}
-	
-	.projects a:hover {
-		border-color: var(--accent);
-		box-shadow: 0 2px 8px rgba(13, 148, 136, 0.1);
-	}
-	
-	.projects strong {
-		display: block;
-		color: rgb(var(--black));
+	.pub-title {
+		font-weight: bold;
+		color: #222;
 		margin-bottom: 0.3em;
 	}
 	
-	.projects span {
+	.pub-authors {
+		font-size: 0.95em;
+		color: #555;
+		margin-bottom: 0.3em;
+	}
+	
+	.pub-venue {
 		font-size: 0.9em;
-		color: rgb(var(--gray-dark));
+		color: #777;
+		font-style: italic;
+		margin-bottom: 0.5em;
+	}
+	
+	.pub-links a {
+		color: #0d9488;
+		text-decoration: none;
+		margin-right: 1em;
+		font-size: 0.9em;
+	}
+	
+	.experience-item {
+		margin-bottom: 1.5em;
+	}
+	
+	.exp-title {
+		font-weight: bold;
+		color: #222;
+		margin-bottom: 0.2em;
+	}
+	
+	.exp-meta {
+		font-size: 0.9em;
+		color: #777;
+		margin-bottom: 0.5em;
+	}
+	
+	.exp-desc {
+		color: #555;
+		margin: 0;
 	}
 	
 	footer {
-		display: flex;
-		gap: 2em;
-		justify-content: center;
+		text-align: center;
 		padding-top: 2em;
-		border-top: 1px solid rgb(var(--gray-light));
+		margin-top: 3em;
+		border-top: 1px solid #ddd;
+		color: #999;
+		font-size: 0.85em;
 	}
 	
-	footer a {
-		color: var(--accent);
-		text-decoration: none;
-		font-weight: 600;
-	}
-	
-	footer a:hover {
-		color: var(--accent-dark);
+	a {
+		color: #0d9488;
 	}
 	
 	@media (max-width: 600px) {
-		body {
-			padding: 2em 1em;
+		.profile {
+			flex-direction: column;
+			align-items: center;
+			text-align: center;
 		}
 		
-		header img {
-			width: 100px;
-			height: 100px;
+		.profile img {
+			width: 140px;
+			height: 140px;
+		}
+		
+		.contact {
+			text-align: left;
+		}
+		
+		.container {
+			padding: 2em 1em;
 		}
 	}
 </style>
