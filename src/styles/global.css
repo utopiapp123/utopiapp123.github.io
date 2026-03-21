@@ -5,9 +5,10 @@
  */
 
 :root {
-	--accent: #6366f1;
-	--accent-dark: #4f46e5;
-	--accent-light: #818cf8;
+	/* 青色调学术风格 - Teal Academic Theme */
+	--accent: #0d9488;        /* teal-600 - 主色调，稳重的青色 */
+	--accent-dark: #0f766e;   /* teal-700 - 深色变体 */
+	--accent-light: #14b8a6;  /* teal-500 - 浅色变体 */
 	--black: 15, 18, 25;
 	--gray: 96, 115, 159;
 	--gray-light: 229, 233, 240;
@@ -18,11 +19,11 @@
 		rgba(var(--gray), 33%);
 }
 
-/* Dark Mode */
+/* Dark Mode - 深色模式 */
 html[data-theme="dark"] {
-	--accent: #818cf8;
-	--accent-dark: #6366f1;
-	--accent-light: #a5b4fc;
+	--accent: #2dd4bf;        /* teal-400 - 深色模式下更亮的青色 */
+	--accent-dark: #14b8a6;   /* teal-500 */
+	--accent-light: #5eead4;  /* teal-300 */
 	--black: 241, 245, 249;
 	--gray: 148, 163, 184;
 	--gray-light: 30, 41, 59;
@@ -115,7 +116,7 @@ a {
 	color: var(--accent);
 }
 a:hover {
-	color: var(--accent);
+	color: var(--accent-dark);
 }
 p {
 	margin-bottom: 1em;
